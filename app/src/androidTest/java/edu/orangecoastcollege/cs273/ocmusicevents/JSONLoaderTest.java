@@ -4,10 +4,14 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -16,12 +20,22 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(AndroidJUnit4.class)
 public class JSONLoaderTest {
+
+    private Context testContext;
+
+    @Before
+    public void setUp() {
+        testContext = InstrumentationRegistry.getTargetContext();
+    }
+
     @Test
-    public void useAppContext() throws Exception {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+    public void testJSONLoader() throws Exception {
+        List<MusicEvent> testList = JSONLoader.loadJSONFromAsset(testContext, "MusicEventsTest.json");
+        assertNotNull("Testing list is NOT null", testList);
 
-        assertEquals("edu.orangecoastcollege.cs273.ocmusicevents", appContext.getPackageName());
+        assertEquals("Testing list size is 2", 2, testList.size());
 
+        MusicEvent event = testList.get(0);
+        assertEquals("Testing the title of the first event", "Blink 182", event.getTitle());
     }
 }
