@@ -11,19 +11,21 @@ public class MusicEventTest {
 
     @Before
     public void setUp() throws Exception {
+        testEvent = new MusicEvent();
     }
 
     @Test
-    public void getTitle() throws Exception {
-
+    public void getSetTitle() throws Exception {
+        assertNull("Testing that getTile() is null", testEvent.getTitle());
+        testEvent.setTitle("Led Zeppelin");
+        assertEquals("Led Zeppelin", testEvent.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
-    }
-
-    @Test
-    public void getDate() throws Exception {
+    public void getSetDate() throws Exception {
+        assertNull("Testing that getDate() is null", testEvent.getDate());
+        testEvent.setDate("March 19");
+        assertEquals("March 19", testEvent.getDate());
     }
 
     @Test
